@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Productos - AZhadkiel{% endblock %}
+{% block content %}
+<div class="bg-white p-4 rounded-4 shadow-sm border mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark mb-0">Catálogo de productos y servicios</h2>
+        <span class="badge bg-primary fs-6 px-3 py-2">Total: {{ productos|length }}</span>
+    </div>
+    <div class="row g-4">
+        {% for prod in productos %}
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-custom h-100 p-3 border shadow-sm">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <span class="badge bg-info text-dark mb-2">{{ prod.categoria }}</span>
+                        <h5 class="card-title fw-bold text-info">{{ prod.nombre }}</h5>
+                        <p class="card-text text-success fw-bold fs-5">$ {{ "%.2f"|format(prod.precio) }}</p>
+                    </div>
+                    <span class="badge bg-secondary text-light mt-3 align-self-start">Stock: {{ prod.stock }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

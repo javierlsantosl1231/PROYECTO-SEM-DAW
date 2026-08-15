@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity AZhadkiel - Soluciones Tecnológicas Innovadoras</title>
+    
+    <!-- Enlaces CDN de Bootstrap 5 y Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Archivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- PLANTILLA BASE (Simulada base.html) -->
+    <!-- ========================================== -->
+    
+    <!-- Encabezado / Header -->
+    <header>
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-2">Cybersecurity AZhadkiel</h1>
+            <p class="lead text-info">Soluciones avanzadas en desarrollo web y seguridad de la información</p>
+        </div>
+    </header>
+
+    <!-- Menú de navegación (Navbar Bootstrap) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info" href="#inicio">AZhadkiel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#quienes-somos">Quiénes somos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#catalogo-dinamico">Catálogo dinámico</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#registro-dinamico">Gestión de solicitudes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL -->
+    <!-- ========================================== -->
+
+    <main class="container my-5">
+        
+        <!-- Sección Inicio -->
+        <section id="inicio" class="mb-5">
+            <div class="glass-hero text-center">
+                <h2 class="h1 fw-bold text-dark mb-3">Inicio</h2>
+                <p class="lead text-secondary mb-4">Bienvenido a <strong>Cybersecurity AZhadkiel</strong>, somos tu aliado estratégico en seguridad informática y desarrollo web de alto rendimiento.</p>
+                <a href="#contacto" class="btn btn-primary btn-lg px-4 shadow-sm">Contáctanos Hoy</a>
+            </div>
+        </section>
+
+        <!-- Sección Quiénes somos -->
+        <section id="quienes-somos" class="mb-5 py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold text-dark mb-3 border-bottom pb-2">Quiénes somos</h2>
+                    <article>
+                        <p class="text-secondary">Cybersecurity AZhadkiel es una empresa enfocada en blindar la infraestructura digital de pymes e instituciones, nuestro equipo combina la ingeniería de software con el hacking ético para garantizar la máxima protección de tus datos.</p>
+                        <p class="text-secondary">A través de metodologías ágiles y arquitecturas robustas innovadoras, entregando soluciones confiables que se adaptan a las exigencias tecnológicas del mundo actual.</p>
+                    </article>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img class="img-fluid rounded-4 shadow-lg" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Servidores y ciberseguridad">
+                </div>
+            </div>
+        </section>
+
+        <!-- Catálogo dinámico (cards Bootstrap con datos y modal) -->
+        <section id="catalogo-dinamico" class="mb-5 py-4 bg-white p-4 rounded-4 shadow-sm border">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark">Catálogo de servicios y soluciones</h2>
+                <p class="text-muted">Servicios generados automáticamente desde objetos y arreglos en JavaScript:
+                "Firewall Perimetral Hardware" "Licencia Antivirus Enterprise" "Servidor Rack 1U Xeon" "Certificado SSL Wildcard Anual"</p>
+            </div>
+            <div id="contenedorCatalogo" class="row g-4"></div>
+        </section>
+
+        <!-- Registro dinámico con formulario, spinner y alerta Bootstrap -->
+        <section id="registro-dinamico" class="my-5 py-4 bg-white p-4 rounded-4 shadow-sm border">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">Gestión dinámica de solicitudes</h2>
+                <p class="text-muted">Registra requerimientos personalizados con validación en tiempo real.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="card card-custom p-4 bg-light border">
+                        <h4 class="fw-bold mb-3">Nuevo Registro</h4>
+                        
+                        <!-- Alerta Bootstrap -->
+                        <div id="alerta-general" class="alert d-none shadow-sm" role="alert"></div>
+
+                        <!-- Spinner Bootstrap simulando carga -->
+                        <div id="spinnerCarga" class="text-center my-3 d-none">
+                            <div class="spinner-border text-info" role="status">
+                                <span class="visually-hidden">Procesando...</span>
+                            </div>
+                            <p class="text-muted small mt-1">Guardando registro en el sistema...</p>
+                        </div>
+
+                        <form id="formRegistro" novalidate>
+                            <div class="mb-3">
+                                <label for="inputNombre" class="form-label">Nombre del servicio / Solicitud</label>
+                                <input type="text" class="form-control" id="inputNombre" placeholder="Ej. Auditoría de Redes">
+                                <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputDescripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="inputDescripcion" rows="2" placeholder="Detalle breve del requerimiento"></textarea>
+                                <div class="invalid-feedback">La descripción debe contener al menos 15 caracteres.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputCategoria" class="form-label">Categoría</label>
+                                <select class="form-select" id="inputCategoria">
+                                    <option value="" selected disabled>Seleccione categoría...</option>
+                                    <option value="Ciberseguridad">Ciberseguridad</option>
+                                    <option value="Desarrollo Web">Desarrollo Web</option>
+                                    <option value="Mantenimiento IT">Mantenimiento IT</option>
+                                    <option value="Soporte Técnico Red">Soporte Técnico</option>
+                                </select>
+                                <div class="invalid-feedback">Debe seleccionar una categoría válida.</div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 py-2 shadow-sm">Registrar Elemento</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="fw-bold mb-0">Listado de Registros</h4>
+                        <span class="badge bg-primary fs-6 px-3 py-2">Total: <span id="contadorRegistros">0</span></span>
+                    </div>
+
+                    <div id="mensajeVacio" class="text-center text-muted py-5 border border-dashed rounded-3">
+                        <p class="mb-0">No hay registros creados todavía, por favor complete el formulario.</p>
+                    </div>
+
+                    <div id="contenedorLista" class="row g-3"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video informativo -->
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-8 text-center">
+                <h3 class="fw-bold mb-4">Video informativo del sector</h3>
+                <div class="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/evugP_criNQ?si=sA_lWTd0QernGK1u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aside -->
+        <aside class="my-5 shadow-sm">
+            <h3 class="fw-bold text-dark mb-3">Información complementaria y promociones</h3>
+            <p class="mb-2"><strong>Horarios:</strong> Atención de Lunes a Viernes de 08:00 a 16:00 hrs. (Soporte de emergencias 24/7).</p>
+            <p class="mb-0"><strong>Promoción del Mes:</strong> ¡50% de descuento en auditorías de vulnerabilidades web!</p>
+        </aside>
+
+        <!-- Contacto -->
+        <section id="contacto" class="my-5 py-4">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold text-dark mb-3">Contacto</h2>
+                    <p class="text-secondary mb-4">Comunícate con nosotros a través de nuestros canales oficiales:</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><strong>Correo:</strong> <a href="mailto:javierleonelz3a@gmail.com" class="text-decoration-none">javierleonelz3a@gmail.com</a></li>
+                        <li class="mb-2"><strong>Teléfono:</strong> <a href="tel:+593 96 336 6693" class="text-decoration-none">+593 96 336 6693</a></li>
+                        <li class="mb-3"><strong>Dirección:</strong> Calle 6 de diciembre, entre Manuela Cañizarez y Mejia, Esmeraldas, Ecuador</li>
+                    </ul>
+                    <div class="d-flex gap-2">
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-outline-light btn-sm">LinkedIn</a>
+                        <a href="https://github.com" target="_blank" class="btn btn-outline-light btn-sm">GitHub</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card card-custom p-4 bg-white">
+                        <h4 class="fw-bold mb-3">Envíanos un mensaje</h4>
+                        <form>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="correo" placeholder="nombre@ejemplo.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label">Mensaje</label>
+                                <textarea class="form-control" id="mensaje" rows="3" placeholder="Tu mensaje..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2 shadow-sm">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal de Bootstrap para detalles -->
+    <div class="modal fade" id="modalDetalleServicio" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light border border-secondary shadow-lg">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title fw-bold text-info" id="modalDetalleLabel">Información del servicio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalTextoDetalle" class="text-muted mb-0">Cargando detalles...</p>
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página (Simulada base.html) -->
+    <footer class="shadow-inner">
+        <div class="container">
+            <p class="mb-1">Estudiante: Javier Leonel Santos Lemos | Asignatura: Desarrollo de Aplicaciones Web (B)</p>
+            <p class="mb-0 text-muted small">© 2026 Cybersecurity AZhadkiel. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

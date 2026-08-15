@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Facturación - AZhadkiel{% endblock %}
+{% block content %}
+<div class="bg-white p-4 rounded-4 shadow-sm border mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark mb-0">Control de facturación</h2>
+        <span class="badge bg-danger fs-6 px-3 py-2">Emitidas: {{ facturas|length }}</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>N° Factura</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total ($)</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fac in facturas %}
+                <tr>
+                    <td class="fw-bold text-info">{{ fac.num }}</td>
+                    <td>{{ fac.cliente }}</td>
+                    <td>{{ fac.fecha }}</td>
+                    <td>$ {{ "%.2f"|format(fac.total) }}</td>
+                    <td>
+                        {% if fac.estado == 'Pagado' %}
+                            <span class="badge bg-success">Pagado</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

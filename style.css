@@ -1,0 +1,101 @@
+:root {
+    --primary-color: #0f172a;
+    --accent-color: #0ea5e9;
+    --bg-light: #f8fafc;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.90)), 
+                url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #e2e8f0;
+    line-height: 1.7;
+}
+
+header {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+    color: #fff;
+    padding: 4rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-hero {
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 3rem 2rem;
+    margin-top: -3rem;
+    position: relative;
+    z-index: 10;
+    color: #f8fafc;
+}
+
+.bg-white {
+    background-color: rgba(30, 41, 59, 0.9) !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.card-custom {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    color: #f8fafc !important;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -3px rgba(14, 165, 233, 0.2);
+    border-color: var(--accent-color) !important;
+}
+
+.bg-light {
+    background-color: rgba(15, 23, 42, 0.7) !important;
+    color: #f8fafc !important;
+}
+
+.text-muted, .text-secondary {
+    color: #94a3b8 !important;
+}
+
+.text-dark {
+    color: #f8fafc !important;
+}
+
+aside {
+    background: rgba(14, 165, 233, 0.1) !important;
+    border-left: 5px solid var(--accent-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    color: #f8fafc !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+footer {
+    background: rgba(15, 23, 42, 0.95);
+    color: #94a3b8;
+    padding: 2.5rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 2.5rem 1rem;
+    }
+    .glass-hero {
+        margin-top: -1.5rem;
+        padding: 1.5rem;
+    }
+}
