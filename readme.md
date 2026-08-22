@@ -5,7 +5,8 @@ El proyecto ha evolucionado desde una página web estática informativa hasta co
 Fase 1: Estructura base y diseño visual (HTML5 y CSS3)
 En las primeras etapas, definimos la identidad del proyecto enfocada en servicios de ciberseguridad, soporte técnico y desarrollo web para pequeñas y medianas empresas.
 
-Estructura Semántica HTML5: Se utilizaron etiquetas semánticas clave como <header>, <nav>, <main>, <section>, <article>, <aside> y <footer> para garantizar la accesibilidad y el SEO.
+Estructura Semántica HTML5: Se utilizaron etiquetas semánticas clave como:
+<header>, <nav>, <main>, <section>, <article>, <aside> y <footer> para garantizar la accesibilidad y el SEO.
 
 Diseño visual y estilos (style.css):
 
@@ -92,3 +93,10 @@ Entorno virtual python: python -m venv venv
 Instalar o actualizar flask: pip install flask
 Ejecutar app: python app.py
 http://127.0.0.1:5000
+
+git init
+git add .
+git commit -m "Primer commit: Mejoras del proyecto"
+git remote add origin https://github.com/javierlsantosl1231/PROYECTO-SEM1-DAW.git
+git branch -M main
+git push -u origin main
