@@ -1,20 +1,55 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+# Configuración de la base de datos MySQL (XAMPP)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3306/cybersecurity_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+# Definición de la tabla Solicitudes para sincronizar con MySQL
+class Solicitud(db.Model):
+    __tablename__ = 'solicitudes'
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    correo = db.Column(db.String(100), nullable=False)
+    servicio = db.Column(db.String(50), nullable=False)
+    mensaje = db.Column(db.Text, nullable=False)
+
+# Crear las tablas automáticamente al iniciar la app
+with app.app_context():
+    db.create_all()
 
 # Ruta principal informativa
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Ruta para procesar y guardar el formulario de solicitudes en MySQL
+@app.route('/enviar_solicitud', methods=['POST'])
+def enviar_solicitud():
+    if request.method == 'POST':
+        nueva_solicitud = Solicitud(
+            nombre=request.form['nombre'],
+            correo=request.form['correo'],
+            servicio=request.form['servicio'],
+            mensaje=request.form['mensaje']
+        )
+        db.session.add(nueva_solicitud)
+        db.session.commit()
+        return redirect(url_for('index'))
+
 # Ruta para el módulo de Productos
 @app.route('/productos')
 def productos():
     lista_productos = [
-        {"id": 1, "nombre": "Firewall Perimetral Hardware", "categoria": "Ciberseguridad", "precio": 1200.00, "stock": 15},
-        {"id": 2, "nombre": "Licencia Antivirus Enterprise (10 PC)", "categoria": "Ciberseguridad", "precio": 450.00, "stock": 50},
-        {"id": 3, "nombre": "Servidor Rack 1U Xeon", "categoria": "Infraestructura", "precio": 2500.00, "stock": 5},
-        {"id": 4, "nombre": "Certificado SSL Wildcard Anual", "categoria": "Desarrollo Web", "precio": 180.00, "stock": 100}
+        {"id": 1, "nombre": "Firewall Perimetral Hardware", "categoria": "Ciberseguridad"},
+        {"id": 2, "nombre": "Licencia Antivirus Enterprise (10 PC)", "categoria": "Ciberseguridad"},
+        {"id": 3, "nombre": "Servidor Rack 1U Xeon", "categoria": "Infraestructura"},
+        {"id": 4, "nombre": "Certificado SSL Wildcard Anual", "categoria": "Desarrollo"}
     ]
     return render_template('productos.html', productos=lista_productos)
 
