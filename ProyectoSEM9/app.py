@@ -26,7 +26,8 @@ with app.app_context():
 # Ruta principal informativa
 @app.route('/')
 def index():
-    return render_template('index.html')
+    todas_las_solicitudes = Solicitud.query.all()
+    return render_template('index.html', solicitudes=todas_las_solicitudes)
 
 # Ruta para procesar y guardar el formulario de solicitudes en MySQL
 @app.route('/enviar_solicitud', methods=['POST'])
