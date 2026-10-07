@@ -12,8 +12,13 @@
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Firewall Hardware" required>
                 </div>
                 <div class="mb-3">
-                    <label for="categoria" class="form-label">Categoría</label>
-                    <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Ej. Ciberseguridad" required>
+                    <label for="categoria_id" class="form-label">Categoría</label>
+                    <select class="form-select" id="categoria_id" name="categoria_id" required>
+                        <option value="" disabled selected>Seleccione una categoría...</option>
+                        {% for cat in categorias %}
+                            <option value="{{ cat.id }}">{{ cat.nombre }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="precio" class="form-label">Precio ($)</label>

@@ -118,13 +118,6 @@ def registro():
         return redirect(url_for('login'))
     return render_template('registro.html')
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('Sesión cerrada correctamente.', 'info')
-    return redirect(url_for('index'))
-
 # ==========================================
 # 3. RUTAS PÚBLICAS Y PANEL ADMIN
 # ==========================================
