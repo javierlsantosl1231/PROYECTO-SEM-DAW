@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <!-- Encabezado Común -->
+    <!-- Encabezado común -->
     <header>
         <div class="container">
             <h1 class="display-5 fw-bold mb-2">Cybersecurity AZhadkiel</h1>
@@ -22,7 +22,7 @@
         </div>
     </header>
 
-<!-- Menú de Navegación (Navbar Bootstrap) -->
+    <!-- Menú de navegación (Navbar Bootstrap) -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold text-info" href="#inicio">AZhadkiel</a>
@@ -41,26 +41,47 @@
         </div>
     </nav>
 
-    <!-- Menú de Navegación Flask -->
+    <!-- Menú de navegación Flask -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold text-info" href="{{ url_for('index') }}">Cybersecurity</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavFlask" aria-controls="navbarNavFlask" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavFlask">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('productos') }}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('proveedores') }}">Proveedores</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('facturacion') }}">Facturación</a></li>
+                    
+                    <!-- Botón de cerrar sesión dinámico -->
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-danger fw-bold" href="{{ url_for('logout') }}">Cerrar Sesión</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Zona de Contenido Principal -->
+<!-- Contenedor para alertas dinámicas (Flash Messages) -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+    <!-- Zona de contenido principal -->
     <main class="container my-5">
         {% block content %}
         <!-- Sección Inicio -->
@@ -72,7 +93,7 @@
             </div>
         </section>
 
-        <!-- Sección Quiénes Somos -->
+        <!-- Sección quiénes somos -->
         <section id="quienes-somos" class="mb-5 py-4">
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
@@ -88,7 +109,7 @@
             </div>
         </section>
 
-        <!-- Catálogo dinámico (Cards Bootstrap con Datos y Modal) -->
+        <!-- Catálogo dinámico (Cards Bootstrap con datos y Modal) -->
         <section id="catalogo-dinamico" class="mb-5 py-4 bg-white p-4 rounded-4 shadow-sm border">
             <div class="text-center mb-5">
                 <h2 class="fw-bold text-dark">Catálogo de Servicios y Soluciones</h2>
@@ -97,7 +118,7 @@
             <div id="contenedorCatalogo" class="row g-4"></div>
         </section>
 
-        <!-- Registro dinámico con Formulario, Spinner y Alerta Bootstrap -->
+        <!-- Registro dinámico con formulario, spinner y alerta Bootstrap -->
         <section id="registro-dinamico" class="my-5 py-4 bg-white p-4 rounded-4 shadow-sm border">
             <div class="text-center mb-4">
                 <h2 class="fw-bold text-dark">Gestión Dinámica de Solicitudes</h2>
@@ -162,10 +183,10 @@
             </div>
         </section>
 
-        <!-- Video Informativo -->
+        <!-- Video informativo -->
         <div class="row justify-content-center my-5">
             <div class="col-lg-8 text-center">
-                <h3 class="fw-bold mb-4">Video Informativo del Sector</h3>
+                <h3 class="fw-bold mb-4">Video informativo del sector</h3>
                 <div class="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/evugP_criNQ?si=XwWCIKt87WUeUPEZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
@@ -221,7 +242,7 @@
     </main>
     {% endblock %}
 
-    <!-- Pie de Página Común -->
+    <!-- Pie de página común -->
     <footer class="shadow-inner">
         <div class="container">
             <p class="mb-1">Desarrollo de Aplicaciones Web (B) | Proyecto Integrador</p>
@@ -229,7 +250,7 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle y JS en static -->
+    <!-- Bootstrap JS bundle y JS en static -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
