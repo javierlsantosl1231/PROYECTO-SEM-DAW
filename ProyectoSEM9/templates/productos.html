@@ -2,7 +2,9 @@
 {% block title %}Productos - AZhadkiel{% endblock %}
 {% block content %}
 <div class="row g-4 mb-5">
-    <!-- Formulario para registrar nuevo producto -->
+    
+    <!-- Formulario para registrar nuevo producto (Visible SOLO para Admin y Técnico) -->
+    {% if current_user.is_authenticated and current_user.rol in ['admin', 'tecnico'] %}
     <div class="col-lg-4">
         <div class="bg-white p-4 rounded-4 shadow-sm border">
             <h4 class="fw-bold text-dark mb-3">Registrar Producto</h4>
@@ -32,21 +34,31 @@
             </form>
         </div>
     </div>
+    {% endif %}
 
-    <!-- Catálogo sincronizado -->
-    <div class="col-lg-8">
+    <!-- Catálogo sincronizado (Ancho dinámico según el rol) -->
+    <div class="{% if current_user.is_authenticated and current_user.rol in ['admin', 'tecnico'] %}col-lg-8{% else %}col-lg-12{% endif %}">
         <div class="bg-white p-4 rounded-4 shadow-sm border">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold text-dark mb-0">Catálogo de productos y servicios</h2>
                 <span class="badge bg-primary fs-6 px-3 py-2">Total: {{ productos|length }}</span>
             </div>
+
+            {% if current_user.is_authenticated and current_user.rol not in ['admin', 'tecnico'] %}
+            <!-- Aviso informativo para usuarios en modo de visualización -->
+            <div class="alert alert-secondary text-center py-2 mb-4">
+                <i class="bi bi-eye-fill"></i> <strong>Modo visualización:</strong> Su rol actual ({{ current_user.rol }}) permite explorar el catálogo, pero no cuenta con privilegios para registrar nuevos elementos.
+            </div>
+            {% endif %}
+
             <div class="row g-4">
                 {% for prod in productos %}
                 <div class="col-md-6">
                     <div class="card card-custom h-100 p-3 border shadow-sm bg-dark text-white">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
-                                <span class="badge bg-info text-dark mb-2">{{ prod.categoria }}</span>
+                                <!-- Muestra la relación con la categoría de forma segura -->
+                                <span class="badge bg-info text-dark mb-2">{{ prod.categoria_rel.nombre if prod.categoria_rel else 'General' }}</span>
                                 <h5 class="card-title fw-bold text-info">{{ prod.nombre }}</h5>
                                 <p class="card-text text-success fw-bold fs-5">$ {{ "%.2f"|format(prod.precio) }}</p>
                             </div>

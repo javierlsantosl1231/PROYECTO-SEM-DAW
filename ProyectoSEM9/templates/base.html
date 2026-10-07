@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Cybersecurity AZhadkiel{% endblock %}</title>
+    <title>{% block title %}Ciberseguridad AZhadkiel{% endblock %}</title>
     
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,60 +12,78 @@
     <!-- Archivo CSS en static -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="bg-light">
 
-    <!-- Encabezado común -->
-    <header>
-        <div class="container">
-            <h1 class="display-5 fw-bold mb-2">Cybersecurity AZhadkiel</h1>
-            <p class="lead text-info">Soluciones avanzadas en desarrollo web y seguridad de la información</p>
+    <!-- 1. Encabezado principal visible al inicio -->
+    <header class="bg-dark text-white py-5 border-bottom border-secondary shadow-sm">
+        <div class="container text-center py-3">
+            <h1 class="display-5 fw-bold text-white mb-2">Ciberseguridad AZhadkiel</h1>
+            <p class="lead text-info mb-0">Soluciones avanzadas en desarrollo web y seguridad de la información</p>
         </div>
     </header>
 
-    <!-- Menú de navegación (Navbar Bootstrap) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-info" href="#inicio">AZhadkiel</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#inicio">Bienvenidos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#quienes-somos">Quiénes Somos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#catalogo-dinamico">Catálogo Dinámico</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#registro-dinamico">Gestión de Solicitudes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-                </ul>
+    <!-- 2. Contenedor de navegación pegajoso (sticky-top) -->
+    <div class="sticky-top shadow-sm">
+        
+        <!-- Navbar principal -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-info" href="{{ url_for('index') }}">Azhadkiel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavTop" aria-controls="navbarNavTop" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavTop">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#inicio">Bienvenidos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#quienes-somos">Quiénes Somos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#catalogo-dinamico">Catálogo Dinámico</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#registro-dinamico">Gestión de Solicitudes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#contacto">Contacto</a></li>
+                        
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.rol in ['admin', 'tecnico', 'tesorero'] %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a></li>
+                            {% endif %}
+                            {% if current_user.rol in ['admin', 'tecnico'] %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin') }}">Panel Admin</a></li>
+                            {% endif %}
+                            <li class="nav-item ms-lg-3">
+                                <a class="nav-link text-danger fw-bold" href="{{ url_for('logout') }}">Cerrar Sesión ({{ current_user.nombre }})</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Iniciar Sesión</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('registro') }}">Registrarse</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Menú de navegación Flask -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-info" href="{{ url_for('index') }}">Cybersecurity</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavFlask" aria-controls="navbarNavFlask" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavFlask">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('productos') }}">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('proveedores') }}">Proveedores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('facturacion') }}">Facturación</a></li>
-                    
-                    <!-- Botón de cerrar sesión dinámico -->
-                    {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link text-danger fw-bold" href="{{ url_for('logout') }}">Cerrar Sesión</a>
-                    </li>
-                    {% endif %}
-                </ul>
+        <!-- Navbar Flask secundario -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-top border-secondary py-2">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-info" href="{{ url_for('index') }}">Ciberseguridad</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavFlask" aria-controls="navbarNavFlask" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavFlask">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('productos') }}">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('proveedores') }}">Proveedores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('facturacion') }}">Facturación</a></li>
+                        
+                        {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-danger fw-bold" href="{{ url_for('logout') }}">Cerrar Sesión</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
 <!-- Contenedor para alertas dinámicas (Flash Messages) -->
 <div class="container mt-3">

@@ -2,7 +2,9 @@
 {% block title %}Clientes - AZhadkiel{% endblock %}
 {% block content %}
 <div class="row g-4 mb-5">
-    <!-- Columna izquierda: Formulario para registrar nuevo cliente -->
+    
+    <!-- Columna izquierda: Formulario para registrar nuevo cliente (Visible solo para Admin y Técnico) -->
+    {% if current_user.is_authenticated and current_user.rol in ['admin', 'tecnico'] %}
     <div class="col-lg-4">
         <div class="bg-white p-4 rounded-4 shadow-sm border">
             <h4 class="fw-bold text-dark mb-3">Registrar Cliente</h4>
@@ -27,15 +29,23 @@
             </form>
         </div>
     </div>
+    {% endif %}
 
-    <!-- Columna derecha: Listado dinámico de clientes sincronizados -->
-    <div class="col-lg-8">
+    <!-- Columna derecha: Listado dinámico de clientes sincronizados (Ancho adaptativo) -->
+    <div class="{% if current_user.is_authenticated and current_user.rol in ['admin', 'tecnico'] %}col-lg-8{% else %}col-lg-12{% endif %}">
         <div class="bg-white p-4 rounded-4 shadow-sm border">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold text-dark mb-0">Gestión de Clientes</h2>
                 <span class="badge bg-primary fs-6 px-3 py-2">Total: {{ clientes|length }}</span>
             </div>
             
+            {% if current_user.is_authenticated and current_user.rol not in ['admin', 'tecnico'] %}
+            <!-- Mensaje informativo para roles en modo visualización pura -->
+            <div class="alert alert-secondary text-center py-2 mb-4">
+                <i class="bi bi-eye-fill"></i> <strong>Modo visualización:</strong> Su rol actual ({{ current_user.rol }}) permite consultar el directorio de clientes, pero no cuenta con privilegios para registrar nuevos registros.
+            </div>
+            {% endif %}
+
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-dark">
