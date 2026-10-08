@@ -243,6 +243,56 @@ def admin():
     solicitudes = Solicitud.query.all()
     return render_template('admin.html', solicitudes=solicitudes)
 
+from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_required, current_user
+from werkzeug.security import generate_password_hash
+
+@app.route('/admin/crear_usuario', methods=['POST'])
+@login_required
+def crear_usuario_admin():
+    # Validar estrictamente que solo el administrador pueda registrar usuarios
+    if current_user.rol != 'admin':
+        flash('Acceso denegado. No tienes privilegios de administración.', 'danger')
+        return redirect(url_for('index'))
+    
+    # Obtener los datos enviados desde el formulario del panel
+    username = request.form.get('username')
+    password = request.form.get('password')
+    rol = request.form.get('rol')
+    nombre = request.form.get('nombre')
+    correo = request.form.get('correo')
+    
+    if not username or not password or not rol or not nombre or not correo:
+        flash('Por favor completa todos los campos para registrar el usuario.', 'warning')
+        return redirect(url_for('admin'))
+    
+    try:
+        cursor = mysql.connection.cursor()
+        
+        # Verificar si el username o correo ya existen
+        cursor.execute("SELECT id FROM usuarios WHERE username = %s OR correo = %s", (username, correo))
+        if cursor.fetchone():
+            flash('El nombre de usuario o el correo electrónico ya están registrados.', 'danger')
+            cursor.close()
+            return redirect(url_for('admin'))
+        
+        # Cifrar la contraseña de forma segura
+        password_hash = generate_password_hash(password)
+        
+        # Insertar el nuevo usuario con el rol seleccionado
+        cursor.execute(
+            "INSERT INTO usuarios (username, password, rol, nombre, correo) VALUES (%s, %s, %s, %s, %s)",
+            (username, password_hash, rol, nombre, correo)
+        )
+        mysql.connection.commit()
+        cursor.close()
+        
+        flash(f'¡Usuario "{nombre}" creado exitosamente con el rol de {rol}!', 'success')
+    except Exception as e:
+        flash(f'Error al registrar el usuario: {str(e)}', 'danger')
+        
+    return redirect(url_for('admin'))
+
 # ==========================================
 # 4. OPERACIONES CRUD (CLIENTES)
 # ==========================================

@@ -73,12 +73,6 @@
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('proveedores') }}">Proveedores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('facturacion') }}">Facturación</a></li>
-                        
-                        {% if current_user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link text-danger fw-bold" href="{{ url_for('logout') }}">Cerrar Sesión</a>
-                        </li>
-                        {% endif %}
                     </ul>
                 </div>
             </div>
